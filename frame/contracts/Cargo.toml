@@ -35,16 +35,17 @@ rand_pcg = { version = "0.3", optional = true }
 
 # Substrate Dependencies
 environmental = { version = "1.1.4", default-features = false }
-frame-benchmarking = { version = "4.0.0-dev", default-features = false, path = "../benchmarking", optional = true }
-frame-support = { version = "4.0.0-dev", default-features = false, path = "../support" }
-frame-system = { version = "4.0.0-dev", default-features = false, path = "../system" }
-pallet-contracts-primitives = { version = "24.0.0", default-features = false, path = "primitives" }
-pallet-contracts-proc-macro = { version = "4.0.0-dev", path = "proc-macro" }
-sp-api = { version = "4.0.0-dev", default-features = false, path = "../../primitives/api" }
-sp-core = { version = "21.0.0", default-features = false, path = "../../primitives/core" }
-sp-io = { version = "23.0.0", default-features = false, path = "../../primitives/io" }
-sp-runtime = { version = "24.0.0", default-features = false, path = "../../primitives/runtime" }
-sp-std = { version = "8.0.0", default-features = false, path = "../../primitives/std" }
+frame-benchmarking = { version = "22.0.0", default-features = false, optional = true }
+frame-support = { version = "22.0.0", default-features = false }
+frame-system = { version = "22.0.0", default-features = false }
+pallet-balances = { version = "22.0.0", optional = true, default-features = false }
+pallet-contracts-primitives = { version = "25.0.0", default-features = false }
+pallet-contracts-proc-macro = { version = "13.0.0" }
+sp-api = { version = "20.0.0", default-features = false }
+sp-core = { version = "22.0.0", default-features = false }
+sp-io = { version = "24.0.0", default-features = false }
+sp-runtime = { version = "25.0.0", default-features = false }
+sp-std = { version = "9.0.0", default-features = false }
 
 [dev-dependencies]
 array-bytes = "6.1"
@@ -54,12 +55,12 @@ pretty_assertions = "1"
 wat = "1"
 
 # Substrate Dependencies
-pallet-balances = { version = "4.0.0-dev", path = "../balances" }
-pallet-timestamp = { version = "4.0.0-dev", path = "../timestamp" }
-pallet-insecure-randomness-collective-flip = { version = "4.0.0-dev", path = "../insecure-randomness-collective-flip" }
-pallet-utility = { version = "4.0.0-dev", path = "../utility" }
-pallet-proxy = { version = "4.0.0-dev", path = "../proxy" }
-sp-keystore = { version = "0.27.0", path = "../../primitives/keystore" }
+pallet-balances = { version = "22.0.0" }
+pallet-timestamp = { version = "21.0.0" }
+pallet-insecure-randomness-collective-flip = { version = "10.0.0" }
+pallet-utility = { version = "22.0.0" }
+pallet-proxy = { version = "22.0.0" }
+sp-keystore = { version = "28.0.0" }
 
 [features]
 default = ["std"]
