@@ -16,6 +16,7 @@
 // limitations under the License.
 
 use crate::{
+	debug::{CallSpan, Tracing},
 	gas::GasMeter,
 	storage::{self, DepositAccount, WriteOutcome},
 	BalanceOf, CodeHash, Config, ContractInfo, ContractInfoOf, DebugBufferVec, Determinism, Error,
@@ -311,7 +312,17 @@ pub trait Ext: sealing::Sealed {
 }
 
 /// Describes the different functions that can be exported by an [`Executable`].
-#[derive(Clone, Copy, PartialEq)]
+#[derive(
+	Copy,
+	Clone,
+	PartialEq,
+	Eq,
+	sp_core::RuntimeDebug,
+	codec::Decode,
+	codec::Encode,
+	codec::MaxEncodedLen,
+	scale_info::TypeInfo,
+)]
 pub enum ExportedFunction {
 	/// The constructor function which is executed on deployment of a contract.
 	Constructor,
@@ -867,10 +878,15 @@ where
 			// Every non delegate call or instantiate also optionally transfers the balance.
 			self.initial_transfer()?;
 
+			let call_span =
+				T::Debug::new_call_span(executable.code_hash(), entry_point, &input_data);
+
 			// Call into the Wasm blob.
 			let output = executable
 				.execute(self, &entry_point, input_data)
 				.map_err(|e| ExecError { error: e.error, origin: ErrorOrigin::Callee })?;
+
+			call_span.after_call(&output);
 
 			// Avoid useless work that would be reverted anyways.
 			if output.did_revert() {

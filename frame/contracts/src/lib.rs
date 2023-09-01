@@ -96,6 +96,7 @@ mod storage;
 mod wasm;
 
 pub mod chain_extension;
+pub mod debug;
 pub mod migration;
 pub mod weights;
 
@@ -137,6 +138,7 @@ pub use weights::WeightInfo;
 
 pub use crate::{
 	address::{AddressGenerator, DefaultAddressGenerator},
+	debug::Tracing,
 	exec::Frame,
 	migration::{MigrateSequence, Migration, NoopMigration},
 	pallet::*,
@@ -181,6 +183,7 @@ const LOG_TARGET: &str = "runtime::contracts";
 #[frame_support::pallet]
 pub mod pallet {
 	use super::*;
+	use crate::debug::Debugger;
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 
@@ -337,6 +340,12 @@ pub mod pallet {
 		/// type Migrations = (v10::Migration<Runtime>,);
 		/// ```
 		type Migrations: MigrateSequence;
+
+		/// # Note
+		/// For most production chains, it's recommended to use the `()` implementation of this
+		/// trait. This implementation offers additional logging when the log target
+		/// "runtime::contracts" is set to trace.
+		type Debug: Debugger<Self>;
 	}
 
 	#[pallet::hooks]
