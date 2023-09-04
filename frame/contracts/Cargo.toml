@@ -1,11 +1,11 @@
 [package]
 name = "pallet-contracts-for-drink"
-version = "21.0.1"
+version = "21.0.2"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
 license = "Apache-2.0"
 homepage = "https://substrate.io"
-repository = "https://github.com/paritytech/substrate/"
+repository = "https://github.com/Cardinal-Cryptography/substrate/"
 description = "FRAME pallet for WASM contracts"
 readme = "README.md"
 include = ["src/**/*", "README.md", "CHANGELOG.md"]
