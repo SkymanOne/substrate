@@ -29,7 +29,7 @@ wasmi = { version = "0.30", default-features = false }
 impl-trait-for-tuples = "0.2"
 
 # Only used in benchmarking to generate contract code
-wasm-instrument = { version = "0.4", optional = true, default-features = false }
+wasm-instrument = { version = "0.4", optional = true, default-features = false, features = ["sign_ext"]}
 rand = { version = "0.8", optional = true, default-features = false }
 rand_pcg = { version = "0.3", optional = true }
 
